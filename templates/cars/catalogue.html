@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+
+      {% if not object_list %}
+      <p class="no-articles">No cars yet</p>
+      {% else %}  
+      <section id="catalogue">
+        <h1>Total cars: {{ object_list.count }}</h1>
+        {% for car in object_list %}
+        <div class="car-card">
+          <div class="image-wrap">
+            <!-- car image -->
+            <img
+              src="{{ car.image_url }}"
+              alt="Rally"
+            />
+          </div>
+          <!-- car type -->
+          <h3>{{ car.type }}</h3>
+          <!-- car model -->
+          <h1>{{ car.model }}</h1>
+          <div class="details-buttons">
+            <!-- car details button -->
+            <a href="{% url 'details_car' id=car.pk %}" class="details-btn">Details</a>
+          </div>
+        </div>
+      {% endfor %}
+      </section>
+    {% endif %}
+{% endblock %}
